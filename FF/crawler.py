@@ -36,8 +36,8 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
     bar_color_b = 'blue'
     bar_color_p = 'pink'
-    start_point = 80000
-    finish_point = 160000
+    start_point = 1
+    finish_point = 100
     step = 1
     width_n = 0.4
     run(start_point, finish_point, step)

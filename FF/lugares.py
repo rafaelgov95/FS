@@ -40,7 +40,7 @@ def fetch_usr_tips(user_id):
         try:
             super_token = 'QEJ4AQPTMMNB413HGNZ5YDMJSHTOHZHMLZCAQCCLXIX41OMP'
             fetch_url_str = 'https://api.foursquare.com/v2/users/' + str(user_id) + '/tips?oauth_token='+super_token + \
-                            '&limit=5000&v=20141231'
+                            '&v=20141231'
             content = get_raw_info(fetch_url_str)
             if content != -1 and content != -2:
                 success = 1
@@ -65,13 +65,18 @@ def fetch_usr_tips(user_id):
             venue_country = item['venue']['location']['cc']
         else:
             venue_country = '-'
+        if 'labeledLatLngs' in item['venue']['location']:
+            location = item['venue']['location']['labeledLatLngs']
+        else:
+            location = '-'
+
         a = {}
         a['len'] = len(item['text'])
         a['text'] = item['text'].encode('utf-8')
         a['venue name'] = item['venue']['name'].encode('utf-8')
         a['timespam'] = str(item['createdAt'])
         a['venue country'] = venue_country
-
+        a['location'] = location
         if 'photo' in item:
             a['photo'] = "y "
         else:
